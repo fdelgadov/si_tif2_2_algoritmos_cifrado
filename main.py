@@ -2,6 +2,19 @@ import tkinter as tk
 from cifrado_permutacion_serie import *
 from descifrado_one_time_pad import *
 
+def cifrado_permutacion_serie():
+    txt = txt_original.get("1.0", "end-1c")
+    txt = preprocesamiento(txt)
+    serie = generar_serie(len(txt))
+    txt = codificar_por_serie(txt, serie)
+    txt_cifrado.delete("1.0", "end")
+    txt_cifrado.insert("1.0", txt)
+
+def descifrado_permutacion_serie():
+    txt = txt_cifrado.get("1.0", "end-1c")
+    serie = generar_serie(len(txt))
+    txt = descifrado_permutacion_serie
+
 ventana = tk.Tk()
 ventana.geometry("640x360")
 
@@ -10,7 +23,7 @@ lbl_aux = tk.Label(ventana)
 lbl_cifrado = tk.Label(ventana, text="Texto cifrado", anchor='w')
 txt_original = tk.Text(ventana, height=5)
 txt_cifrado = tk.Text(ventana, height=5)
-btn_cifrar = tk.Button(ventana, text="Cifrar", command="")
+btn_cifrar = tk.Button(ventana, text="Cifrar", command=cifrado_permutacion_serie)
 btn_descifrar = tk.Button(ventana, text="Descifrar", command="")
 
 lbl_original.pack(fill='x')
