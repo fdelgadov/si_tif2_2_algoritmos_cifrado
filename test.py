@@ -1,3 +1,4 @@
+import sys
 from cifrado_permutacion_serie import *
 from descifrado_permutacion_serie import *
 from descifrado_one_time_pad import *
@@ -39,6 +40,11 @@ def test2_one_time_pad():
         clave = archivo.read()
 
     print(txt)
-    print(descifrado_one_time_pad(txt, clave))
+    print(descrifrado_otp_diccionario(txt, clave))
 
-test2_one_time_pad()
+_ = sys.argv
+print(_)
+if _[1] == "test1":
+    test1_permutacion_serie()
+elif _[1] == "test2":
+    test2_one_time_pad()
