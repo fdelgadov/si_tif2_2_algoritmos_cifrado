@@ -1,0 +1,13 @@
+texto clave cifrado
+XOR
+0 0 0
+0 1 1
+1 0 1
+1 1 0
+
+cifrado clave texto
+XOR
+0 0 0
+0 1 1
+1 0 1
+1 1 0
