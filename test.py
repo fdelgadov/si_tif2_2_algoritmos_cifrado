@@ -1,7 +1,6 @@
 import sys
 from cifrado_permutacion_serie import *
-from descifrado_permutacion_serie import *
-from descifrado_one_time_pad import *
+from cifrado_one_time_pad import *
 
 def descifrado():
     nombre_archivo = "cifrado"
@@ -42,9 +41,22 @@ def test2_one_time_pad():
     print(txt)
     print(descrifrado_otp_diccionario(txt, clave))
 
+def test3_preprocesamiento():
+    txt = ""
+
+    for i in range(0, 256):
+        txt += chr(i)
+
+    print(txt)
+
+    txt = solo_minusculas_ñ(txt)
+
+    print(txt)
+
 _ = sys.argv
-print(_)
 if _[1] == "test1":
     test1_permutacion_serie()
 elif _[1] == "test2":
     test2_one_time_pad()
+elif _[1] == "test3":
+    test3_preprocesamiento()

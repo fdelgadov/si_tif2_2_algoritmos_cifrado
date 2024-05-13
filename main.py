@@ -1,39 +1,29 @@
 import tkinter as tk
-from cifrado_permutacion_serie import *
-from descifrado_one_time_pad import *
-from descifrado_permutacion_serie import *
+from cifrado_one_time_pad import *
+from panel2 import *
+from panel1 import *
 
-def btn_cifrado_permutacion_serie():
-    txt = txt_original.get("1.0", "end-1c")
-    txt = preprocesamiento(txt)
-    serie = generar_serie(len(txt))
-    txt = codificar_por_serie(txt, serie)
-    txt_cifrado.delete("1.0", "end")
-    txt_cifrado.insert("1.0", txt)
+def mostrar_panel1():
+    panel1.pack()
+    panel2.pack_forget()
+    btn_cambio.config(text="One Time Pad", command=mostrar_panel2)
 
-def btn_descifrado_permutacion_serie():
-    txt = txt_cifrado.get("1.0", "end-1c")
-    serie = generar_serie(len(txt))
-    txt = descifrado_permutacion_serie(txt, serie)
-    txt_original.delete("1.0", "end")
-    txt_original.insert("1.0", txt)
+def mostrar_panel2():
+    panel2.pack()
+    panel1.pack_forget()
+    btn_cambio.config(text="Permutacion por serie", command=mostrar_panel1)
 
-ventana = tk.Tk()
-ventana.geometry("640x360")
+raiz = tk.Tk()
+raiz.title("Algoritmos de cifrado")
+raiz.geometry("640x360")
 
-lbl_original = tk.Label(ventana, text="Texto original", anchor='w')
-lbl_aux = tk.Label(ventana)
-lbl_cifrado = tk.Label(ventana, text="Texto cifrado", anchor='w')
-txt_original = tk.Text(ventana, height=5)
-txt_cifrado = tk.Text(ventana, height=5)
-btn_cifrar = tk.Button(ventana, text="Cifrar", command=btn_cifrado_permutacion_serie)
-btn_descifrar = tk.Button(ventana, text="Descifrar", command=btn_descifrado_permutacion_serie)
+btn_cambio = tk.Button(raiz, text="One Time Pad", command=mostrar_panel2)
 
-lbl_original.pack(fill='x')
-txt_original.pack(fill='x')
-lbl_aux.pack()
-txt_cifrado.pack(fill='x')
-btn_cifrar.pack()
-btn_descifrar.pack()
+btn_cambio.pack()
 
-ventana.mainloop()
+panel2 = panel2(raiz)
+panel1 = panel1(raiz)
+
+mostrar_panel1()
+
+raiz.mainloop()

@@ -19,7 +19,9 @@ tildes_vocales = {
     'É': 'E',
     'Í': 'I',
     'Ó': 'O',
-    'Ú': 'U'
+    'Ú': 'U',
+    'ü': 'u',
+    'Ü': 'u'
 }
 
 signos = [' ', ',', '.', ';', '\n']
@@ -43,6 +45,18 @@ def a_mayuscula(txt):
 
     for x in range(97, 123):
         aux = aux.replace(chr(x), chr(x - 32))
+    
+    aux = aux.replace('ñ', 'Ñ')
+
+    return aux
+
+def a_minuscula(txt):
+    aux = txt
+
+    for x in range(65, 91):
+        aux = aux.replace(chr(x), chr(x  + 32))
+
+    aux = aux.replace('Ñ', 'ñ')
 
     return aux
 
@@ -51,6 +65,18 @@ def eliminar_signos(txt):
 
     for c in signos:
         aux = aux.replace(c, '')
+
+    return aux
+
+def solo_minusculas_ñ(txt):
+    aux = ""
+    validos = "abcdefghijklmnñopqrstuvwxyz"
+
+    txt = a_minuscula(txt)
+    txt = eliminar_tildes(txt)
+    for c in txt:
+        if c in validos:
+            aux += c
 
     return aux
 
